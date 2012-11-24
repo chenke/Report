@@ -61,8 +61,12 @@ class BaseRptTopatsGet():
         """
         for rpt_data in self.rpt_data_list:
             rpt_data_normal = rpt_data[rpt_data.find('['):rpt_data.find(']')+1]
-            one_rpt_record_list = json.loads(rpt_data_normal)
-            self.rpt_record_list.extend(one_rpt_record_list)
+            one_rpt_record_list = json.loads(rpt_data_normal.lower())
+            one_rpt_record_list_filter = []
+            for element in one_rpt_record_list:
+                if len(element.keys()) >= 13:
+                    one_rpt_record_list_filter.append(element)
+            self.rpt_record_list.extend(one_rpt_record_list_filter)
         return True
             
     def parse_rpt_old(self):

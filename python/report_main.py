@@ -63,6 +63,7 @@ class RptAll(object):
             time.sleep(2)
     
         time.sleep(TOPATS_SLEEP_TIME)
+        #time.sleep(20)
     
         #获取下载链接, 下载报表并存储
         for i in range(0, len(shop_info_list_mid)):
@@ -83,7 +84,7 @@ class RptAll(object):
                 report_logger.exception('获取下载链接，抓取或存储出错')
                 fail_shop_info_list.append(shop_info_list_mid[i])
             
-            time.sleep(2)
+            time.sleep(0.2)
     
         return fail_shop_info_list
     
@@ -112,6 +113,7 @@ class RptAll(object):
             time.sleep(0.1)
     
         time.sleep(TOPATS_SLEEP_TIME)
+        #time.sleep(20)
     
         #获取下载链接, 下载报表并存储
         for i in range(0, len(shop_info_list_mid)):
@@ -131,7 +133,7 @@ class RptAll(object):
             rpt_effect_db.clear_one_day_ago_rpt(RptAll.ONE_WEEK_AGO)
             rpt_effect_db.clear_one_day_rpt(RptAll.YESTERDAY)
             rpt_effect_db.save_records(rpt_topats.rpt_record_list)
-            time.sleep(0.1)
+            time.sleep(2)
     
         return fail_shop_info_list
     
@@ -267,7 +269,7 @@ if __name__ == '__main__':
     shop_info_db = ShopInfoDB(mongoConn)
     shop_id_list = shop_info_db.get_all_shop_id_list()
     #shop_id_list = shop_id_list[0:3]
-    #shop_id_list = ['58735843']
+    shop_id_list = ['58735843']
     
     RptAll.get_day_info()
     shop_info_list = RptAll.get_shop_infos_by_shop_ids(shop_id_list)

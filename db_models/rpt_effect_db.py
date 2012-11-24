@@ -67,11 +67,14 @@ class RptEffectDB(object):
                 summary_rpt_dict[campaign_id]['paycount'] += record['indirectpaycount']
                 summary_rpt_dict[campaign_id]['paycount'] += record['directpaycount']
             else:
-                summary_rpt_dict[campaign_id] = {
-                        'fav':record['favitemcount'] + record['favshopcount']
-                        , 'pay':record['indirectpay'] + record['directpay']
-                        , 'paycount':record['indirectpaycount'] + record['directpaycount']
-                        }
+                if record.has_key('favitemcount') and record.has_key('favshopcount') \
+                        and record.has_key('indirectpay') and record.has_key('directpay') \
+                        and record.has_key('indirectpaycount') and record.has_key('directpaycount'):
+                    summary_rpt_dict[campaign_id] = {
+                            'fav':record['favitemcount'] + record['favshopcount']
+                            , 'pay':record['indirectpay'] + record['directpay']
+                            , 'paycount':record['indirectpaycount'] + record['directpaycount']
+                            }
 
         #for key in summary_rpt_dict.keys():
         #    summary_rpt_dict[key]['impressions'] /=3
