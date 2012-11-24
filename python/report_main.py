@@ -269,7 +269,7 @@ if __name__ == '__main__':
     shop_info_db = ShopInfoDB(mongoConn)
     shop_id_list = shop_info_db.get_all_shop_id_list()
     #shop_id_list = shop_id_list[0:3]
-    shop_id_list = ['58735843']
+    #shop_id_list = ['58735843']
     
     RptAll.get_day_info()
     shop_info_list = RptAll.get_shop_infos_by_shop_ids(shop_id_list)
