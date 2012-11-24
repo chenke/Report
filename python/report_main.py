@@ -24,6 +24,7 @@ from effect_rpt_get import EffectRptGet
 from tao_open_models.simba_campaigns_get import SimbaCampaignsGet
 from tao_open_models.simba_rpt_campaignbase_get import SimbaRptCampaignBaseGet 
 from tao_open_models.simba_rpt_campaigneffect_get import SimbaRptCampaignEffectGet 
+from common.exceptions import InvalidAccessTokenException
 from date_tools.date_handle import DateHandle
 
 class RptAll(object):
@@ -161,6 +162,9 @@ class RptAll(object):
             shop_info = shop_info_db.get_shop_info_by_shop_id(shop_id)
             try:
                 shop_info.update({'campaign_ids':RptAll.get_campaigns_by_shop_info(shop_info)})
+            except InvalidAccessTokenException, data:
+                report_logger.error("nick [%s] access_token expired", shop_info['nick'])
+                continue
             except Exception, data:
                 report_logger.exception('get campaign_ids failed')
                 continue
@@ -268,7 +272,7 @@ class RptAll(object):
 if __name__ == '__main__':
     shop_info_db = ShopInfoDB(mongoConn)
     shop_id_list = shop_info_db.get_all_shop_id_list()
-    #shop_id_list = shop_id_list[0:3]
+    #shop_id_list = shop_id_list[0:5]
     #shop_id_list = ['58735843']
     
     RptAll.get_day_info()
