@@ -60,7 +60,7 @@ class RptAll(object):
                 continue
             rpt_topats_list_mid.append(base_rpt_topats)
             shop_info_list_mid.append(shop_info)
-            time.sleep(0.2)
+            time.sleep(2)
     
         time.sleep(TOPATS_SLEEP_TIME)
     
@@ -83,7 +83,7 @@ class RptAll(object):
                 report_logger.exception('获取下载链接，抓取或存储出错')
                 fail_shop_info_list.append(shop_info_list_mid[i])
             
-            time.sleep(0.2)
+            time.sleep(2)
     
         return fail_shop_info_list
     
